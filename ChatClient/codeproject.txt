@@ -1,0 +1,116 @@
+http://www.codeproject.com/KB/aspnet/ChatApplication.aspx
+Introduction
+All of us are more or less using many of the chat applications available in the market everyday but still sometimes wonder of how it has been developed. This is a simple private chat application developed in DotNet using a web service. 
+
+The application targets mainly the beginners who still sometimes fear of using the web service. The audience will get a taste of how web servcie can be easily developed and can be used in a chatting application. 
+
+Background
+The chat client is developed just like any other chat application using Windows form and the chat service is developed using the Dot Net web service residing in the web server.
+
+Using the code
+ChatService.asmx (Web Service)
+The ChatService.asmx in the zip file represents the name of the web service in which you will see lot of web methods that will be called by the clients using the application.
+
+[WebService(Namespace = "http://tempuri.org/")]
+[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+public class ChatService : System.Web.Services.WebService
+{
+    static protected ArrayList arrUsers = new ArrayList();
+    static protected ArrayList arrMessage = new ArrayList(); 
+  
+    public ChatService () { 
+    
+        //Uncomment the following line if using designed components 
+        //InitializeComponent(); 
+    }
+Remember these methods are always 'public', otherwise they won't be available for the outside world. You can only set a public method as a web method, otherwise they will be treated as private methods to the web service. 
+
+Let us walk through some of these methods:
+
+    [WebMethod]
+    public void AddUser(string strUser)
+    {        
+        arrUsers.Add(strUser);                 
+    }        
+The AddUser() method will add the user who has logged in the ArrayList being maintained in the web service. By this way the online user list is always updated and will give you the list of users in the room at any point of time.
+
+   [WebMethod]
+   public string GetUsers() 
+   {
+       string strUser = string.Empty; 
+       for (int i = 0; i < arrUsers.Count; i++)
+       {
+           strUser = strUser + arrUsers[i].ToString() + "|";
+       }
+       return strUser;
+   }
+The GetUser() method will retrieve the list of users who have logged in the application. This list can be easily available from the Arraylist at any time. 
+
+   [WebMethod]
+   public void RemoveUser(string strUser)
+   {
+       for (int i = 0; i < arrUsers.Count; i++)
+       {
+           if(arrUsers[i].ToString() == strUser)
+           arrUsers.RemoveAt(i);
+       }
+   }
+The RemoveUser() method will do the opposite. It will take out the required name out of the Arraylist whenever the user logout from the application. 
+
+   [WebMethod]
+   public void SendMessage(string strFromUser, string strToUser, string strMess)
+   {
+       arrMessage.Add(strToUser + ":" + strFromUser + ":" + strMess); 
+   }
+The SendMessage() method will concatinate the strings (the username to which the message has been sent, the username who has sent the message and the actual message) coming as parameters and will add the new string to another ArrayList. This ArrayList will simply hold all the messages coming from diferent clients intended for different users. 
+
+   [WebMethod]
+   public string ReceiveMessage(string strUser)
+   {
+       string strMess = string.Empty;
+       for (int i = 0; i < arrMessage.Count; i++)
+       {
+           string[] strTo = arrMessage[i].ToString().Split(':');
+           if (strTo[0].ToString() == strUser)
+           {
+               for (int j = 1; j < strTo.Length; j++)
+               {
+                   strMess = strMess + strTo[j] + ":";
+               }
+               arrMessage.RemoveAt(i);
+               break;
+           } 
+       }
+       return strMess;
+   }
+The ReceiveMessage() method is doing all the tricks. It will filter the messages from the Arraylist and will send each message to its actual recipient. 
+
+1. It is taking out the messages one by one from the Arraylist.
+
+2. It is comparing the 'ToUser' name attached with the message with the username from whom the method is requested.
+
+3. If the names are same means the message is intended for that recipient only. It will return the message to that user and remove the message from the arrayList once it is transfered. 
+
+ChatClient (Client Application)
+The Chat Client is developed using the Windows Forms. You will see two forms by the name Form1 and PrivateMessage.
+
+In this solution we have added the web service as a web reference to this project. So whenever you add the web service that has been deployed in any of your server, the client application will register that path to the server. 
+
+The Form1 is the interface that is populating the list of online users logged into the aplication. There is no login form in this application as the username is automatically assigned from the windows login name. The same name will get displayed in the list which on click will open a one to one conversation window to chat with that person. There is a timer attached with this form that will call the GetUser() web method in the web service every 2 seconds to update the list of online users.
+
+<img src="Chatting/screenshot1.jpeg">
+
+The other form is the privateMessage that will allow the user to talk to the other person. There is also a timer attached with this form that will call the ReceiveMessage() method to check whether any new message has arrived from the other side. So if there are 3 windows open for an user, the respective window will look for it's own message through the timer.
+
+<img src="Chatting/screenshot2.jpeg">
+
+In the application, the notifyIcon control is also used so that the user can keep the application running in the system tray. There is a menu associated with the application through which the 
+
+One catchy thing that has been used in this application is to blink the chat window whenever any new message comes. The blinking will go on till the user clicks the window to read the message. This is done using Windows API.
+
+[DllImport("user32.dll")]static extern Int32 FlashWindowEx(ref FLASHWINFO pwfi);
+Points of Interest
+This is just one way of creating a very simple chat application using a web service. You can create this application using a different approach. You can further procced with this application by creating more functionalities like Public Chatting, Conferences, etc.
+
+Happy Chatting!!!!!!  
+

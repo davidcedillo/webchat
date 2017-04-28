@@ -1,0 +1,16 @@
+C:\Users\Sistemas 8\Desktop\EasyTalk\ChatClient\ChatClient\bin\Release\EasyTalk.exe.config
+C:\Users\Sistemas 8\Desktop\EasyTalk\ChatClient\ChatClient\obj\Release\EasyTalk.exe
+C:\Users\Sistemas 8\Desktop\EasyTalk\ChatClient\ChatClient\obj\Release\EasyTalk.pdb
+C:\Users\Sistemas 8\Desktop\EasyTalk\ChatClient\ChatClient\obj\Release\EasyTalk.XmlSerializers.dll
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\bin\Release\EasyTalk.exe.config
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\EasyTalk.exe
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\EasyTalk.pdb
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\EasyTalk.XmlSerializers.dll
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\ChatClient.csprojResolveAssemblyReference.cache
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\ChatClient.About.resources
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\ChatClient.Configurator.resources
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\ChatClient.Form1.resources
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\ChatClient.PrivateMessage.resources
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\ChatClient.Properties.Resources.resources
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\ChatClient.Settings.resources
+C:\Users\rayan\Desktop\chat\ChatClient\ChatClient\obj\Release\ChatClient.csproj.GenerateResource.Cache
